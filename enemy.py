@@ -20,14 +20,14 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.y = SCREEN_HEIGHT
 
     def update(self):
-        # Find direction vector (dx, dy) between enemy and player.
+        # Find displacement (dx, dy) between enemy and player.
         dx = player.player_x - self.rect.x
         dy = player.player_y - self.rect.y
         dist = math.hypot(dx, dy)
         # Make dx,dy normal vectors
         dx = dx / dist
         dy = dy / dist
-        # Move along this normalized vector towards the player at a random speed.
+        # Move along this normal vector towards the player at a random speed.
         self.rect.x += dx * random.uniform(ZOMBIE_MIN_SPEED, ZOMBIE_MAX_SPEED)
         self.rect.y += dy * random.uniform(ZOMBIE_MIN_SPEED, ZOMBIE_MAX_SPEED)
 

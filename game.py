@@ -46,7 +46,7 @@ while running:
         message = start_font.render("ZOMBIE RUN!", True, (255, 0, 0))
         screen.blit(message, (SCREEN_WIDTH / 2 - message.get_width() / 2,
                               SCREEN_HEIGHT / 2 - message.get_height() / 2))
-        instructions = instructions_font.render("Press WASD to move and ENTER to start",
+        instructions = instructions_font.render("Use the controller and press A to start",
                                                 True, (255, 0, 0))
         screen.blit(instructions, (SCREEN_WIDTH / 2 - instructions.get_width() / 2,
                                    (SCREEN_HEIGHT / 2 - instructions.get_height() / 2) + message.get_height()))
@@ -63,8 +63,7 @@ while running:
                 sys.exit()
 
         # Start Game and change modifiers
-        keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[pygame.K_RETURN]:
+        if joystick.get_button(0) == True:
             score_last = time.time()
             difficulty_last = time.time()
             pygame.mixer.Sound.stop(main_menu_music)
@@ -135,6 +134,7 @@ while running:
 
         # Updates the positions of all sprites
         player.move()
+        player.aim()
         enemies.update()
 
         # Check for enemy collisions with the player
@@ -166,13 +166,12 @@ while running:
         message_game_over = game_over_font.render("GAME OVER!", True, (255, 0, 0))
         screen.blit(message_game_over, (SCREEN_WIDTH / 2 - message_game_over.get_width() / 2,
                                         SCREEN_HEIGHT / 2 - message_game_over.get_height() / 2))
-        instructions = instructions_font.render("Press ENTER to restart", True, (255, 0, 0))
+        instructions = instructions_font.render("Press A to restart", True, (255, 0, 0))
         screen.blit(instructions, (SCREEN_WIDTH / 2 - instructions.get_width() / 2,
                                    (SCREEN_HEIGHT / 2 - instructions.get_height() / 2) + message_game_over.get_height()))
 
         # Restart the Game
-        keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[pygame.K_RETURN]:
+        if joystick.get_button(0) == True:
             health = GAME_HEALTH
             score = 0
             SPAWN_PER_INSTANCE = 1

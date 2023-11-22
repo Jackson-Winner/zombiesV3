@@ -1,9 +1,18 @@
+import sys
+
 import pygame
 from game_parameters import SCREEN_WIDTH, SCREEN_HEIGHT, GRASS_TILE_SIZE, ROAD_TILE_SIZE, MAX_SPEED
 
 pygame.mixer.init()
 pygame.joystick.init()
-joystick = pygame.joystick.Joystick(0)
+
+try:
+    joystick = pygame.joystick.Joystick(0)
+except:
+    print("Please connect a controller or it won't work!")
+    pygame.quit()
+    sys.exit()
+
 print(f"{joystick.get_name()} Connected \nPower Level: {joystick.get_power_level()}")
 hurt = pygame.mixer.Sound("assets/sounds/lego anakin death sound.mp3")
 crosshair = pygame.image.load("assets/sprites/crosshair.png")

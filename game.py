@@ -1,5 +1,3 @@
-import sys
-
 import pygame.mixer
 
 from background import *
@@ -13,6 +11,8 @@ from game_parameters import *
 pygame.init()
 main_menu_music = pygame.mixer.Sound("assets/sounds/doom.mp3")
 music = pygame.mixer.Sound("assets/sounds/lastofus.mp3")
+bomb_sound = pygame.mixer.Sound("assets/sounds/explosion.wav")
+heart_sound = pygame.mixer.Sound("assets/sounds/heart.mp3")
 
 # Create Screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -94,6 +94,7 @@ while running:
             nukes.draw(screen)
             result_bomb = pygame.sprite.spritecollide(player, nukes, True)
             if result_bomb:
+                pygame.mixer.Sound.play(bomb_sound)
                 enemies.empty()
                 nukes.empty()
 
@@ -102,6 +103,7 @@ while running:
             hearts.draw(screen)
             result_heart = pygame.sprite.spritecollide(player, hearts, True)
             if result_heart:
+                pygame.mixer.Sound.play(heart_sound)
                 health += len(result_heart)
 
         # Show the score
@@ -134,7 +136,6 @@ while running:
 
         # Updates the positions of all sprites
         player.move()
-        player.aim()
         enemies.update()
 
         # Check for enemy collisions with the player

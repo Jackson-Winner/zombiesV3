@@ -3,8 +3,6 @@ SCREEN_HEIGHT = 700
 ROAD_TILE_SIZE = 40
 GRASS_TILE_SIZE = 40
 
-#X_CHANGE = 0
-#Y_CHANGE = 0
 MAX_SPEED = 7  # Speed of the player
 GAME_HEALTH = 5  # Initial health of the player
 SCORE_INTERVAL = .5  # Interval that score is added
